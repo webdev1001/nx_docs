@@ -1,0 +1,67 @@
+{
+    "title": "NX",
+    "langTitle": "NX Documentation in English",
+    "description": "Documentation for the NX Framework.",
+    "sections": [
+        {
+            "title": "Introduction",
+            "dir": "intro",
+            "articles": []
+        },
+        {
+            "title": "Installation",
+            "dir": "install",
+            "articles": [
+                "obtain",
+                "webserver"
+            ]
+        },
+        {
+            "title": "Overview",
+            "dir": "function",
+            "articles": [
+                "general",
+                "this",
+                "closures",
+                "arguments",
+                "constructors",
+                "scopes"
+            ]
+        },
+        {
+            "title": "Arrays",
+            "dir": "array",
+            "articles": [
+                "general",
+                "constructor"
+            ]
+        },
+        {
+            "title": "Types",
+            "dir": "types",
+            "articles": [
+                "equality",
+                "typeof",
+                "instanceof",
+                "casting"
+            ]
+        },
+        {
+            "title": "Core",
+            "dir": "core",
+            "articles": [
+                "eval",
+                "undefined",
+                "semicolon",
+                "delete"
+            ]
+        },
+        {
+            "title": "Other",
+            "dir": "other",
+            "articles": [
+                "timeouts"
+            ]
+        }
+    ]
+}
