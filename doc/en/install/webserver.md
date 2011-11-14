@@ -57,7 +57,21 @@ js, css, or image files through the framework.
 
 ### apache
 
-Uncomment the following line in your httpd.conf file:
+In your httpd.conf file, locate your DocumentRoot.  It
+will look something like this:
+
+    DocumentRoot "/srv/http"
+
+Now find the `<Directory>` tag that corresponds to your
+DocumentRoot.  It will look like this:
+
+    <Directory "/srv/http">
+
+Within that tag, change the `AllowOverride` setting:
+
+    AllowOverride All
+
+Now uncomment the following line:
 
     Include conf/extra/httpd-vhosts.conf
 
@@ -69,12 +83,7 @@ Edit your conf/extra/httpd-vhosts.conf file and add the following code block:
         ErrorLog "/var/log/httpd/nx_error.log"
         CustomLog "/var/log/httpd/nx_access.log" common
         <Directory /srv/http/mine/nx/app/public>
-            AllowOverride None
-            RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteCond %{REQUEST_FILENAME} !favicon.ico$
-            RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+            Options +FollowSymLinks
         </Directory>
     </VirtualHost>
 
@@ -86,6 +95,18 @@ out the code.  In this configuration, /srv/http/nx/ is the
 project root.  The public-facing part of your application,
 on the other hand, should always be app/public **within** the
 project root (so in this example, it's /srv/http/nx/app/public).
+
+Within your project's **public** root, create an .htaccess file
+(in our case, it'd be located at /srv/http/nx/app/public/.htaccess)
+and paste the following block inside:
+
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !favicon.ico$
+        RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+    </IfModule>
 
 ### Restart
 

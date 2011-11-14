@@ -14,13 +14,11 @@ NX requires that the following extensions be enabled:
     extension=json.so
     ; Note that you will most likely have to build
     ; the memcached extension yourself. See
-    ; http://www.php.net/manual/en/memcached.installation.php 
+    ; http://www.php.net/manual/en/memcached.installation.php
     ; for more information.
     extension=memcached.so
 
-The extensions below are optional.  Enable them only if you plan 
+The extension below is optional.  Enable it only if you plan
 on using MySQL.
 
-    extension=mysql.so
-    extension=mysqli.so
     extension=pdo_mysql.so
