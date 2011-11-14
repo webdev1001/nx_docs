@@ -141,7 +141,7 @@ nav li h1 a {
 nav li.nav_intro h1 a		{ background-image: none; padding-left: 20px; }
 nav li.nav_install h1 a		{ background-position: 5px 3px; }
 nav li.nav_function h1 a	{ background-position: 5px -60px; }
-nav li.nav_array h1 a		{ background-position: 5px -28px; }
+nav li.nav_overview h1 a	{ background-position: 5px -28px; }
 nav li.nav_types h1 a		{ background-position: 5px -92px; }
 nav li.nav_core h1 a		{ background-position: 5px -124px; }
 nav li.nav_other h1 a		{ background-position: 5px -156px; }
@@ -282,8 +282,8 @@ nav li h1 a:after {
 }
 
 nav li.nav_intro h1 a:after						{ content: 'i'; font-style: italic; }
-#install:after, nav li.nav_install h1 a:after	{ content: '>'; }
-#array:after, nav li.nav_array h1 a:after		{ content: '[ ]'; }
+#install:after, nav li.nav_install h1 a:after	{ content: '{ }'; }
+#overview:after, nav li.nav_overview h1 a:after	{ content: '[ ]'; }
 #types:after, nav li.nav_types h1 a:after		{ content: '='; font-weight: bold; }
 #core:after, nav li.nav_core h1 a:after			{ content: 'js'; }
 

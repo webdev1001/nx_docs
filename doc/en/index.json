@@ -23,41 +23,6 @@
             "articles": [
                 "started"
             ]
-        },
-        {
-            "title": "Arrays",
-            "dir": "array",
-            "articles": [
-                "general",
-                "constructor"
-            ]
-        },
-        {
-            "title": "Types",
-            "dir": "types",
-            "articles": [
-                "equality",
-                "typeof",
-                "instanceof",
-                "casting"
-            ]
-        },
-        {
-            "title": "Core",
-            "dir": "core",
-            "articles": [
-                "eval",
-                "undefined",
-                "semicolon",
-                "delete"
-            ]
-        },
-        {
-            "title": "Other",
-            "dir": "other",
-            "articles": [
-                "timeouts"
-            ]
         }
     ]
 }
