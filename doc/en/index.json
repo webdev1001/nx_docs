@@ -13,19 +13,15 @@
             "dir": "install",
             "articles": [
                 "obtain",
+                "php",
                 "webserver"
             ]
         },
         {
             "title": "Overview",
-            "dir": "function",
+            "dir": "overview",
             "articles": [
-                "general",
-                "this",
-                "closures",
-                "arguments",
-                "constructors",
-                "scopes"
+                "started"
             ]
         },
         {
