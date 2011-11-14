@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en"><head><title>NX</title><meta charset="utf-8"><meta name="description" content="Documentation for the NX Framework."><link rel="stylesheet" href="style/garden.css" media="all"><link rel="stylesheet" href="style/solarized_dark.css" media="all"><link rel="stylesheet" href="style/print.css" media="print"><!--[if lt IE 9]>
+<script src="javascript/html5.js"></script>
+<![endif]-->
+</head><body><!-- Navigation--><nav id="nav_main"><div><ul><li class="active"><a href="/JavaScript-Garden/" title="NX Documentation in English">en</a></li></ul><a id="top" href="#intro" title="Back to top">#top</a><a id="hide_menu" class="tablet">Hide Menu</a></div><ul><li class="nav_intro"><h1><a href="#intro">Introduction</a></h1><ul></ul></li><li class="nav_install"><h1><a href="#install">Installation</a></h1><ul><li><a href="#install.obtain">Obtaining the Source Code</a></li><li><a href="#install.php">PHP Configuration</a></li><li><a href="#install.webserver">Webserver Configuration</a></li></ul></li><li class="nav_overview"><h1><a href="#overview">Overview</a></h1><ul><li><a href="#overview.started">Getting Started</a></li></ul></li></ul></nav><!-- Mobile navigation--><nav id="nav_mobile"><a id="nav_prev_section" href="#">prev section<span class="nav_section_name">section name</span></a><a id="nav_next_section" href="#">next section<span class="nav_section_name">section name</span></a><a id="show_menu">show menu</a></nav><!-- Sections--><section id="intro"><!-- Introduction--><header id="intro.intro"><h1>Introduction</h1><div><p><strong>NX</strong> is a PHP framework that prides itself on speed, simplicity, and
+ease of use.  Weighing in at a mere 340kB, it gives you everything you 
+need to build an application and no more. </p>
+
+<h2>The Author</h2>
+
+<p>NX is the work of <a href="https://github.com/NSinopoli">Nick Sinopoli</a>.</p>
+
+<h2>License</h2>
+
+<p>NX is published under the <a href="https://github.com/NSinopoli/nx/blob/master/LICENSE">BSD License</a> and is hosted on <a href="https://github.com/NSinopoli/nx">GitHub</a>.</p>
+
+<p>This documentation takes its design from the fabulous <a href="http://bonsaiden.github.com/JavaScript-Garden/">JavaScript Garden</a>
+project.  JavaScript Garden is published under the <a href="https://github.com/BonsaiDen/JavaScript-Garden/blob/next/LICENSE">MIT license</a> and is 
+hosted on <a href="https://github.com/BonsaiDen/JavaScript-Garden">GitHub</a>.</p></div></header><!-- Articles--></section><section id="install"><!-- Introduction--><header id="install.intro"><h1>Installation</h1></header><!-- Articles--><article id="install.obtain"><h2>Obtaining the Source Code</h2><div><p>Clone the repository into a directory that your
+webserver can access:</p>
+
+<pre><code>git clone git@github.com:NSinopoli/nx.git /srv/http/nx
+</code></pre></div></article><article id="install.php"><h2>PHP Configuration</h2><div><p>You&#39;ll want to make the following adjustments to your php.ini file.
+Not only will they enhance the security of your web application,
+they will also encourage you to code with best practices in mind.</p>
+
+<pre><code>cgi.fix_pathinfo=0
+short_open_tag = Off
+error_reporting = E_ALL | E_STRICT
+</code></pre>
+
+<p>NX requires that the following extensions be enabled:</p>
+
+<pre><code>extension=curl.so
+extension=json.so
+; Note that you will most likely have to build
+; the memcached extension yourself. See
+; http://www.php.net/manual/en/memcached.installation.php
+; for more information.
+extension=memcached.so
+</code></pre>
+
+<p>The extension below is optional.  Enable it only if you plan
+on using MySQL.</p>
+
+<pre><code>extension=pdo_mysql.so
+</code></pre></div></article><article id="install.webserver"><h2>Webserver Configuration</h2><div><p>Choose a server name for your project, and edit your
+/etc/hosts file accordingly:</p>
+
+<pre><code>127.0.0.2    nx
+</code></pre>
+
+<p>Note that 127.0.0.2 can be changed to any 127.*.*.* address.</p>
+
+</div><div><h3>nginx</h3>
+
+<p>Place this code block within the <code>http {}</code> block
+in your nginx.conf file:</p>
+
+<pre><code>server {
+     server_name     nx;
+     root            /srv/http/nx/app/public;
+     index           index.php index.html;
+
+     access_log      /var/log/nginx/nx_access.log;
+     error_log       /var/log/nginx/nx_error.log;
+
+     location / {
+        try_files $uri /index.php?url=$uri;
+     }
+
+     location ~ \.php$ {
+        fastcgi_pass    unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_index   index.php;
+        fastcgi_param   SCRIPT_FILENAME
+                        $document_root$fastcgi_script_name;
+        include         fastcgi_params;
+     }
+ }
+</code></pre>
+
+<p>Note that you will have to change the <code>server_name</code> to
+the name you used above in your hosts file.  You will also
+have to adjust the directories according to where you checked
+out the code.  In this configuration, /srv/http/nx/ is the
+project root.  The public-facing part of your application,
+on the other hand, should always be app/public <strong>within</strong> the
+project root (so in this example, it&#39;s /srv/http/nx/app/public).</p>
+
+<p>What&#39;s happening here, exactly?  The try_files directive will check
+to see if the resouce at $uri exists in the filesystem (in this
+example, within /srv/http/nx/app/public).  If it does, that file is
+served by nginx.  If it doesn&#39;t, it&#39;s then routed to /index.php,
+whereupon the framework takes responsibility for parsing the url
+and handling the request.  The try_files directive is great for
+serving static content - there&#39;s no need to pass requests for
+js, css, or image files through the framework.</p>
+
+</div><div><h3>lighttpd</h3>
+
+<pre><code>TODO
+</code></pre>
+
+</div><div><h3>apache</h3>
+
+<p>In your httpd.conf file, locate your DocumentRoot.  It
+will look something like this:</p>
+
+<pre><code>DocumentRoot "/srv/http"
+</code></pre>
+
+<p>Now find the <code>&lt;Directory&gt;</code> tag that corresponds to your
+DocumentRoot.  It will look like this:</p>
+
+<pre><code>&lt;Directory "/srv/http"&gt;
+</code></pre>
+
+<p>Within that tag, change the <code>AllowOverride</code> setting:</p>
+
+<pre><code>AllowOverride All
+</code></pre>
+
+<p>Now uncomment the following line:</p>
+
+<pre><code>Include conf/extra/httpd-vhosts.conf
+</code></pre>
+
+<p>Edit your conf/extra/httpd-vhosts.conf file and add the following code block:</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+    DocumentRoot "/srv/http/nx/app/public"
+    ServerName nx
+    ErrorLog "/var/log/httpd/nx_error.log"
+    CustomLog "/var/log/httpd/nx_access.log" common
+    &lt;Directory /srv/http/mine/nx/app/public&gt;
+        Options +FollowSymLinks
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Note that you will have to change the <code>ServerName</code> to
+the name you used above in your hosts file.  You will also
+have to adjust the directories ( in <code>DocumentRoot</code>, as well
+as the <code>&lt;Directory&gt;</code> tag) according to where you checked
+out the code.  In this configuration, /srv/http/nx/ is the
+project root.  The public-facing part of your application,
+on the other hand, should always be app/public <strong>within</strong> the
+project root (so in this example, it&#39;s /srv/http/nx/app/public).</p>
+
+<p>Within your project&#39;s <strong>public</strong> root, create an .htaccess file
+(in our case, it&#39;d be located at /srv/http/nx/app/public/.htaccess)
+and paste the following block inside:</p>
+
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !favicon.ico$
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+&lt;/IfModule&gt;
+</code></pre>
+
+</div><div><h3>Restart</h3>
+
+<p>Restart your webserver, and then point your browser at the server name
+you chose above.  If you see a welcome screen, then you&#39;ve configured
+everything correctly!</p></div></article></section><section id="overview"><!-- Introduction--><header id="overview.intro"><h1>Overview</h1></header><!-- Articles--><article id="overview.started"><h2>Getting Started</h2><div><p>TODO.</p></div></article></section><!-- Footer--><footer><p>Copyright &copy; 2011. Built with 
+<a href="http://nodejs.org/">Node.js </a>using a
+<a href="https://github.com/visionmedia/jade/">jade </a>template. 
+</p></footer><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script><script src="javascript/highlight.pack.js"></script><script src="javascript/plugin.js"></script><script src="javascript/garden.js"></script></body></html>
