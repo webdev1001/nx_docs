@@ -71,6 +71,10 @@ Within that tag, change the `AllowOverride` setting:
 
     AllowOverride All
 
+Ensure that your `DirectoryIndex` setting contains index.php:
+
+    DirectoryIndex index.php index.html
+
 Now uncomment the following line:
 
     Include conf/extra/httpd-vhosts.conf
