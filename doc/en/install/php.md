@@ -12,13 +12,13 @@ NX requires that the following extensions be enabled:
 
     extension=curl.so
     extension=json.so
+
+The extensions below are optional.  Enable them only if you plan
+on using MySQL or Memcached.
+
+    extension=pdo_mysql.so
     ; Note that you will most likely have to build
     ; the memcached extension yourself. See
     ; http://www.php.net/manual/en/memcached.installation.php
     ; for more information.
     extension=memcached.so
-
-The extension below is optional.  Enable it only if you plan
-on using MySQL.
-
-    extension=pdo_mysql.so
