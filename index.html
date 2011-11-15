@@ -119,6 +119,11 @@ DocumentRoot.  It will look like this:</p>
 <pre><code>AllowOverride All
 </code></pre>
 
+<p>Ensure that your <code>DirectoryIndex</code> setting contains index.php:</p>
+
+<pre><code>DirectoryIndex index.php index.html
+</code></pre>
+
 <p>Now uncomment the following line:</p>
 
 <pre><code>Include conf/extra/httpd-vhosts.conf
