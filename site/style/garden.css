@@ -132,8 +132,7 @@ nav > ul > li {
 nav li h1 a {
 	font-size: 15px;
 	font-weight: bold;
-	padding: 7px 20px 10px 32px;
-	background-image: url('../image/sidebar-icon.png');
+	padding: 7px 20px 10px 20px;
 	background-repeat: no-repeat;
 	background-position: 3px 3px;
 }
@@ -285,7 +284,7 @@ nav li.nav_intro h1 a:after						{ content: 'i'; font-style: italic; }
 #install:after, nav li.nav_install h1 a:after	{ content: '{ }'; }
 #overview:after, nav li.nav_overview h1 a:after	{ content: '[ ]'; }
 #types:after, nav li.nav_types h1 a:after		{ content: '='; font-weight: bold; }
-#core:after, nav li.nav_core h1 a:after			{ content: 'js'; }
+#core:after, nav li.nav_core h1 a:after			{ content: '( )'; }
 
 #appendix:after, nav li.nav_appendix h1 a:after	{
 	content: '*';

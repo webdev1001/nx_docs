@@ -23,6 +23,13 @@
             "articles": [
                 "started"
             ]
+        },
+        {
+            "title": "Core",
+            "dir": "core",
+            "articles": [
+                "model"
+            ]
         }
     ]
 }
